@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,7 +25,7 @@ jobs:
         run: npm ci
 
       - name: Test
-        run: npm test -- --threads false --runInBand
+        run: npx vitest run --threads false
 
       - name: Build app
         run: npm run build
