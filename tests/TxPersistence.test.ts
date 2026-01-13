@@ -49,17 +49,17 @@ describe('Tx Persistence & Restart Safety', () => {
     persistence.save({ transactions: [snapshotTx] });
 
     resetTxPipeline(); // simulate restart
-    getTxPipeline(); // instantiate
     const loaded = persistence.load();
     if (loaded?.transactions) {
       getTxStateMachine().hydrate(loaded.transactions);
     }
-    const status = getTransactionStatus(snapshotTx.txId);
+    getTxPipeline(); // instantiate (uses hydrated state machine)
+    const tx = getTxStateMachine().getTransaction(snapshotTx.txId);
 
-    expect(status.ok).toBe(true);
-    if (status.ok) {
-      expect(status.data.txId).toBe(snapshotTx.txId);
-      expect(status.data.state).toBe(TxState.TX_SUBMIT);
+    expect(tx).toBeDefined();
+    if (tx) {
+      expect(tx.txId).toBe(snapshotTx.txId);
+      expect(tx.state).toBe(TxState.TX_SUBMIT);
     }
   });
 

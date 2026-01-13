@@ -317,9 +317,8 @@ describe('SafetyReportGenerator', () => {
     });
 
     it('should include safety report hash in metadata', () => {
-      const metadata = generator.getAttestationMetadata();
       const report = generator.generateReport();
-      
+      const metadata = generator.getAttestationMetadata();
       expect(metadata.safetyReportHash).toBe(report.reportHash);
     });
   });
