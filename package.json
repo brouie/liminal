@@ -11,7 +11,8 @@
     "start": "npm run build && electron .",
     "dev": "tsc && electron .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "dev:mvp": "tsc && electron dist/electron/main.js"
   },
   "keywords": [
     "privacy",
