@@ -65,11 +65,15 @@ function createMainWindow() {
     },
   });
 
-  mainWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  mainWindow.webContents.setWindowOpenHandler(() => {
+    mainWindow?.webContents.send('liminal:block', { reason: 'window.open blocked' });
+    return { action: 'deny' };
+  });
   mainWindow.webContents.on('will-navigate', (event, url) => {
     const parsed = new URL(url);
     if (parsed.protocol !== 'https:') {
       event.preventDefault();
+      mainWindow?.webContents.send('liminal:block', { reason: 'Navigation blocked (non-https)', url });
     }
   });
 
@@ -104,11 +108,15 @@ function createContext(initialUrl = 'https://example.com/', presetId?: string, p
       partition,
     },
   });
-  view.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  view.webContents.setWindowOpenHandler(() => {
+    mainWindow?.webContents.send('liminal:block', { reason: 'window.open blocked', contextId });
+    return { action: 'deny' };
+  });
   view.webContents.on('will-navigate', (event, url) => {
     const parsed = new URL(url);
     if (parsed.protocol !== 'https:') {
       event.preventDefault();
+      mainWindow?.webContents.send('liminal:block', { reason: 'Navigation blocked (non-https)', url, contextId });
     }
   });
   view.webContents.loadURL(initialUrl);

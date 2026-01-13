@@ -1,0 +1,17 @@
+appId: com.liminal.app
+productName: Liminal
+directories:
+  output: release
+files:
+  - dist/**
+  - package.json
+asar: true
+icon: build/icons/icon.png
+mac:
+  target: dmg
+win:
+  target: nsis
+linux:
+  target: AppImage
+extraMetadata:
+  main: dist/electron/main.js

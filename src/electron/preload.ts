@@ -11,6 +11,9 @@ const api = {
   forward: (contextId: string) => ipcRenderer.invoke('liminal:forward', contextId),
   reload: (contextId: string) => ipcRenderer.invoke('liminal:reload', contextId),
   getBrowserStatus: () => ipcRenderer.invoke('liminal:getBrowserStatus'),
+  onBlock: (callback: (payload: { reason: string; contextId?: string; url?: string }) => void) => {
+    ipcRenderer.on('liminal:block', (_event, payload) => callback(payload));
+  },
 
   // Submission API passthrough
   submitTransaction: (txId: string) => ipcRenderer.invoke('liminal:submitTransaction', txId),

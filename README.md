@@ -18,17 +18,9 @@ Liminal is a browser-based execution environment designed to reduce metadata lea
 
 ---
 
-## What Liminal Is Not
+## Scope & Guarantees
 
-**Liminal is not:**
-
-- A wallet
-- A mixer
-- A relayer
-- A transaction broadcaster
-- A custody solution
-
-Liminal does not submit transactions, move funds, or execute private rails in Phase 3.
+Liminal is a privacy-first browser execution environment with scoped, auditable signing and read-only rails. Phase 3 remains frozen for safety; fund movement and private rails are disabled.
 
 ---
 
@@ -115,9 +107,21 @@ Phase 3 is frozen as read-only. Any attempt to modify execution paths must throw
 ## Links
 
 - Documentation: `README.md`
+- Getting started: [`START_HERE.md`](START_HERE.md)
 - GitHub: https://github.com/brouie/liminal
 - Website: https://brouie.github.io/liminal/
 - Security: [`SECURITY.md`](SECURITY.md)
+
+---
+
+## Binary Quickstart (v0.1.x)
+
+- Download the platform build from the GitHub release (v0.1.3).
+- Run the Liminal app:
+  - Tabs are isolated (unique partitions), HTTPS-only navigation, `window.open` blocked.
+  - Address bar + Go, Back/Forward/Reload; inline error messages for blocked/failed nav.
+  - Status panel shows contextId/partition and safety flags (read-only).
+- CLI remains available after `npm install` / `npm run build` (see CLI usage below).
 
 ---
 

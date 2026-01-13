@@ -28,6 +28,14 @@ function renderTabs() {
   });
   tabsEl.appendChild(addBtn);
 
+  if (!tabs.length) {
+    const empty = document.createElement('span');
+    empty.id = 'empty-tabs';
+    empty.textContent = 'No tabs. Click + to create one.';
+    tabsEl.appendChild(empty);
+    return;
+  }
+
   tabs.forEach(tab => {
     const el = document.createElement('div');
     el.className = `tab${tab.id === activeId ? ' active' : ''}`;
@@ -118,6 +126,11 @@ async function refreshStatus() {
     .filter(Boolean)
     .join(' | ');
 }
+
+api.onBlock((payload: { reason: string; url?: string }) => {
+  const parts = [payload.reason, payload.url ? `(${payload.url})` : ''].filter(Boolean);
+  errorEl.textContent = parts.join(' ');
+});
 
 document.getElementById('submit')!.addEventListener('click', async () => {
   const txId = txInput.value.trim();
