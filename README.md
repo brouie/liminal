@@ -82,8 +82,9 @@ All guarantees are backed by machine-checkable invariants, internal security rev
 
 **Documentation:**
 
-- Security Review (Option B): `docs/SECURITY_REVIEW_B.FINAL.md`
-- Safety Attestation: `docs/SAFETY_ATTESTATION.md`
+- Security: [`SECURITY.md`](SECURITY.md)
+- Security Review (Option B): [`docs/SECURITY_REVIEW_B.FINAL.md`](docs/SECURITY_REVIEW_B.FINAL.md)
+- Safety Attestation: [`docs/SAFETY_ATTESTATION.md`](docs/SAFETY_ATTESTATION.md)
 - Threat Model: `docs/THREAT_MODEL.md`
 
 ---
@@ -116,6 +117,6 @@ Phase 3 is frozen as read-only. Any attempt to modify execution paths must throw
 - Documentation: `README.md`
 - GitHub: https://github.com/brouie/liminal
 - Website: https://brouie.github.io/liminal/
-- Security: `SECURITY.md`
+- Security: [`SECURITY.md`](SECURITY.md)
 
 ---
