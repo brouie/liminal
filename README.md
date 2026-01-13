@@ -120,3 +120,17 @@ Phase 3 is frozen as read-only. Any attempt to modify execution paths must throw
 - Security: [`SECURITY.md`](SECURITY.md)
 
 ---
+
+## CLI Usage (v0.1.0)
+
+### Install / Build
+- Install dependencies: `npm install`
+- Build: `npm run build` (outputs `dist/cli/liminal.js`)
+- CLI entry (after build): `node dist/cli/liminal.js ...`
+  - If installed globally via npm, `liminal` is available as a bin.
+
+### Commands
+- Submit: `liminal submit <tx.json>`
+  - `tx.json` must include a string field `txId`.
+- Status: `liminal status <txId>`
+- Receipt: `liminal receipt <txId>`

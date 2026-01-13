@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'">
+  <title>Liminal</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Title Bar (for custom window controls) -->
+    <div class="titlebar" id="titlebar">
+      <div class="titlebar-drag">
+        <span class="titlebar-title">
+          <span class="logo">◈</span> LIMINAL
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Left Side: Browser Area -->
+      <div class="browser-area">
+        <!-- Tab Bar -->
+        <div class="tab-bar" id="tab-bar">
+          <div class="tabs-container" id="tabs-container">
+            <!-- Tabs will be inserted here -->
+          </div>
+          <button class="new-tab-btn" id="new-tab-btn" title="New Tab">
+            <span>+</span>
+          </button>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="nav-bar" id="nav-bar">
+          <div class="nav-controls">
+            <button class="nav-btn" id="btn-back" title="Go Back" disabled>
+              <span>←</span>
+            </button>
+            <button class="nav-btn" id="btn-forward" title="Go Forward" disabled>
+              <span>→</span>
+            </button>
+            <button class="nav-btn" id="btn-reload" title="Reload">
+              <span>↻</span>
+            </button>
+          </div>
+          <div class="url-bar">
+            <div class="context-badge" id="context-badge" title="Context ID">
+              <span class="badge-icon">◈</span>
+              <span class="badge-text" id="context-id-short">—</span>
+            </div>
+            <input type="text" class="url-input" id="url-input" placeholder="Enter URL or search...">
+          </div>
+          <div class="toolbar-actions">
+            <button class="action-btn rotate-btn" id="btn-rotate" title="Rotate Identity">
+              <span>⟳</span>
+              <span class="btn-label">Rotate</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Browser View Container (managed by Electron) -->
+        <div class="browser-view-container" id="browser-view-container">
+          <div class="empty-state" id="empty-state">
+            <div class="empty-logo">◈</div>
+            <h2>LIMINAL</h2>
+            <p>Privacy-native browser execution</p>
+            <p class="empty-hint">Every tab runs in an isolated, ephemeral context</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Privacy Receipt Panel -->
+      <div class="receipt-panel" id="receipt-panel">
+        <div class="receipt-header">
+          <h3>
+            <span class="receipt-icon">🛡</span>
+            Privacy Receipt
+          </h3>
+        </div>
+
+        <div class="receipt-content" id="receipt-content">
+          <!-- Context Info -->
+          <div class="receipt-section">
+            <div class="section-title">Context</div>
+            <div class="receipt-item">
+              <span class="item-label">ID</span>
+              <span class="item-value mono" id="receipt-context-id">—</span>
+            </div>
+            <div class="receipt-item">
+              <span class="item-label">Proxy</span>
+              <span class="item-value" id="receipt-proxy">Direct</span>
+            </div>
+            <div class="receipt-item">
+              <span class="item-label">Duration</span>
+              <span class="item-value" id="receipt-duration">—</span>
+            </div>
+          </div>
+
+          <!-- Blocked Stats -->
+          <div class="receipt-section">
+            <div class="section-title">Blocked Requests</div>
+            <div class="stats-grid">
+              <div class="stat-box blocked">
+                <div class="stat-value" id="stat-blocked-count">0</div>
+                <div class="stat-label">Requests</div>
+              </div>
+              <div class="stat-box domains">
+                <div class="stat-value" id="stat-blocked-domains">0</div>
+                <div class="stat-label">Domains</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Privacy Analysis (Phase 2 - READ-ONLY) -->
+          <div class="receipt-section ai-section" id="ai-section">
+            <div class="section-title">
+              <span>🤖</span>
+              <span>AI Analysis</span>
+            </div>
+            
+            <!-- Risk Level Badge -->
+            <div class="ai-risk-container">
+              <div class="ai-risk-badge" id="ai-risk-badge" data-level="unknown">
+                <span class="risk-label">Risk</span>
+                <span class="risk-value" id="ai-risk-level">—</span>
+              </div>
+              <div class="ai-confidence" id="ai-confidence">
+                <span class="confidence-label">Confidence</span>
+                <span class="confidence-value">—</span>
+              </div>
+            </div>
+
+            <!-- Explanation -->
+            <div class="ai-explanation" id="ai-explanation">
+              <p class="explanation-text">Analyzing privacy status...</p>
+            </div>
+
+            <!-- Detected Tracking -->
+            <div class="ai-tracking" id="ai-tracking">
+              <div class="tracking-label">Detected Techniques</div>
+              <div class="tracking-list" id="ai-tracking-list">
+                <span class="empty-tracking">No tracking detected</span>
+              </div>
+            </div>
+
+            <!-- Recommendation (DISPLAY ONLY) -->
+            <div class="ai-recommendation" id="ai-recommendation">
+              <div class="recommendation-label">Recommended Mode</div>
+              <div class="recommendation-badge" id="ai-recommendation-badge" data-mode="balanced">
+                BALANCED
+              </div>
+              <p class="recommendation-note">Display only — does not affect enforcement</p>
+            </div>
+          </div>
+
+          <!-- Policy Simulation Preview (Phase 2.2 - PREVIEW ONLY) -->
+          <div class="receipt-section simulation-section" id="simulation-section">
+            <div class="section-title collapsible" id="toggle-simulation">
+              <span>🔮</span>
+              <span>What If Analysis</span>
+              <span class="toggle-icon">▼</span>
+            </div>
+            
+            <div class="simulation-content" id="simulation-content">
+              <p class="simulation-disclaimer">Preview only — no actual changes applied</p>
+              
+              <!-- Key Differences (Phase 2.3) -->
+              <div class="diff-key-differences" id="diff-key-differences">
+                <div class="diff-section-title">Why Modes Differ</div>
+                <ul class="diff-list" id="diff-list">
+                  <li class="diff-item">Analyzing differences...</li>
+                </ul>
+              </div>
+              
+              <!-- STRICT Mode Preview -->
+              <div class="simulation-mode" data-mode="strict">
+                <div class="simulation-mode-header">
+                  <span class="mode-badge strict">STRICT</span>
+                  <span class="mode-breakage" id="sim-strict-breakage">—</span>
+                </div>
+                <p class="mode-explanation" id="sim-strict-explanation">Analyzing...</p>
+                <div class="mode-factors" id="sim-strict-factors">
+                  <span class="factors-label">Key protections:</span>
+                  <span class="factors-list">—</span>
+                </div>
+                <div class="simulation-mode-changes" id="sim-strict-changes">
+                  <span class="loading-sim">Calculating...</span>
+                </div>
+              </div>
+              
+              <!-- BALANCED Mode Preview -->
+              <div class="simulation-mode" data-mode="balanced">
+                <div class="simulation-mode-header">
+                  <span class="mode-badge balanced">BALANCED</span>
+                  <span class="mode-breakage" id="sim-balanced-breakage">—</span>
+                </div>
+                <p class="mode-explanation" id="sim-balanced-explanation">Analyzing...</p>
+                <div class="mode-factors" id="sim-balanced-factors">
+                  <span class="factors-label">Key protections:</span>
+                  <span class="factors-list">—</span>
+                </div>
+                <div class="simulation-mode-changes" id="sim-balanced-changes">
+                  <span class="loading-sim">Calculating...</span>
+                </div>
+              </div>
+              
+              <!-- PERMISSIVE Mode Preview -->
+              <div class="simulation-mode" data-mode="permissive">
+                <div class="simulation-mode-header">
+                  <span class="mode-badge permissive">PERMISSIVE</span>
+                  <span class="mode-breakage" id="sim-permissive-breakage">—</span>
+                </div>
+                <p class="mode-explanation" id="sim-permissive-explanation">Analyzing...</p>
+                <div class="mode-factors" id="sim-permissive-factors">
+                  <span class="factors-label">Key protections:</span>
+                  <span class="factors-list">—</span>
+                </div>
+                <div class="simulation-mode-changes" id="sim-permissive-changes">
+                  <span class="loading-sim">Calculating...</span>
+                </div>
+              </div>
+              
+              <p class="simulation-footer">Explanations reference concrete protections, not abstract AI language</p>
+            </div>
+          </div>
+
+          <!-- AI Decision Trace (Phase 2.4 - AUDIT ONLY) -->
+          <div class="receipt-section trace-section" id="trace-section">
+            <div class="section-title collapsible" id="toggle-trace">
+              <span>📋</span>
+              <span>Audit Trace</span>
+              <span class="toggle-icon">▼</span>
+            </div>
+            
+            <div class="trace-content" id="trace-content">
+              <p class="trace-disclaimer">How this explanation was produced</p>
+              
+              <!-- Trace Summary -->
+              <div class="trace-summary">
+                <div class="trace-item">
+                  <span class="trace-label">Trace ID</span>
+                  <span class="trace-value mono" id="trace-id">—</span>
+                </div>
+                <div class="trace-item">
+                  <span class="trace-label">Timestamp</span>
+                  <span class="trace-value" id="trace-timestamp">—</span>
+                </div>
+                <div class="trace-item">
+                  <span class="trace-label">Classifier</span>
+                  <span class="trace-value" id="trace-classifier">—</span>
+                </div>
+              </div>
+              
+              <!-- Inputs → Rules → Outputs Chain -->
+              <div class="trace-chain">
+                <div class="trace-chain-section">
+                  <div class="chain-header">📥 Inputs</div>
+                  <div class="chain-content" id="trace-inputs">
+                    <span class="trace-loading">Loading...</span>
+                  </div>
+                </div>
+                
+                <div class="trace-chain-arrow">→</div>
+                
+                <div class="trace-chain-section">
+                  <div class="chain-header">⚙️ Rules Triggered</div>
+                  <div class="chain-content" id="trace-rules">
+                    <span class="trace-loading">Loading...</span>
+                  </div>
+                </div>
+                
+                <div class="trace-chain-arrow">→</div>
+                
+                <div class="trace-chain-section">
+                  <div class="chain-header">📤 Outputs</div>
+                  <div class="chain-content" id="trace-outputs">
+                    <span class="trace-loading">Loading...</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Export Link -->
+              <div class="trace-export">
+                <a href="#" class="export-link" id="export-trace-link">Export trace as JSON</a>
+                <span class="export-note">(manual, local only)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blocked Domains List -->
+          <div class="receipt-section">
+            <div class="section-title collapsible" id="toggle-blocked">
+              <span>Blocked Domains</span>
+              <span class="toggle-icon">▼</span>
+            </div>
+            <div class="domain-list" id="blocked-domains-list">
+              <div class="empty-list">No blocked domains</div>
+            </div>
+          </div>
+
+          <!-- Third-Party Domains List -->
+          <div class="receipt-section">
+            <div class="section-title collapsible" id="toggle-third-party">
+              <span>Third-Party Domains</span>
+              <span class="toggle-icon">▼</span>
+            </div>
+            <div class="domain-list" id="third-party-domains-list">
+              <div class="empty-list">No third-party requests</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Footer -->
+        <div class="receipt-footer">
+          <div class="footer-info">
+            <span class="footer-hint">Context isolation active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/renderer.js"></script>
+</body>
+</html>
+

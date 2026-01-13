@@ -1,0 +1,167 @@
+{
+  "version": "1.0.0",
+  "description": "Default blocklist for Liminal privacy execution",
+  "rules": [
+    {
+      "domain": "*.doubleclick.net",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.googlesyndication.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.googleadservices.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.google-analytics.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.googletagmanager.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.facebook.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.facebook.net",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.fbcdn.net",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.twitter.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.ads-twitter.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.amazon-adsystem.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.criteo.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.criteo.net",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.outbrain.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.taboola.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.hotjar.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.hotjar.io",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.mixpanel.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.segment.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.segment.io",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.amplitude.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.quantserve.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.scorecardresearch.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.newrelic.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.nr-data.net",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.omtrdc.net",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.demdex.net",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.adsrvr.org",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.adnxs.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.rubiconproject.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.pubmatic.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.openx.net",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.casalemedia.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.bluekai.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.exelator.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.krxd.net",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.moatads.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.rlcdn.com",
+      "category": "tracking"
+    },
+    {
+      "domain": "*.adsymptotic.com",
+      "category": "advertising"
+    },
+    {
+      "domain": "*.clarity.ms",
+      "category": "tracking"
+    }
+  ]
+}
+
