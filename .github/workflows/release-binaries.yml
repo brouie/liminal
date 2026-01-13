@@ -29,7 +29,13 @@ jobs:
       - name: Build app
         run: npm run build
 
+      - name: Install Linux packaging deps
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y icnsutils graphicsmagick xz-utils rpm
+
       - name: Package binaries
+        uses: electron-builder/action@v1
+        with:
+          args: '--config electron-builder.yml --publish always'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx electron-builder --config electron-builder.yml --publish always
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
