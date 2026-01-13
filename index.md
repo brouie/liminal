@@ -3,17 +3,9 @@ layout: default
 title: Liminal
 ---
 
-## 1. Hero Section
-
-**Title:**
-
-Liminal
-
-**Subtitle:**
+## Liminal
 
 A privacy-first browser execution environment with formally enforced safety guarantees.
-
-**Body (2–3 lines max):**
 
 Liminal isolates browsing, transactions, and signing into deterministic, auditable contexts.
 
@@ -21,13 +13,9 @@ Phase 3 is frozen: no transaction submission, no funds movement, no private exec
 
 ---
 
-## 2. What Liminal Is
-
-**Short paragraph:**
+## What Liminal Is
 
 Liminal is a browser-based execution environment designed to reduce metadata leakage during web interaction and transaction preparation. It provides scoped signing, read-only blockchain access, and deterministic privacy controls without enabling fund movement.
-
-**Bullet points:**
 
 - Context-isolated execution
 - Scoped, auditable signing
@@ -37,9 +25,7 @@ Liminal is a browser-based execution environment designed to reduce metadata lea
 
 ---
 
-## 3. What Liminal Is Not
-
-**Bullet list:**
+## What Liminal Is Not
 
 - Not a wallet
 - Not a mixer
@@ -47,19 +33,13 @@ Liminal is a browser-based execution environment designed to reduce metadata lea
 - Not a transaction broadcaster
 - Not a custody solution
 
-**Statement:**
-
 Liminal does not submit transactions, move funds, or execute private rails in Phase 3.
 
 ---
 
-## 4. Safety Guarantees (Phase 3)
-
-**Short paragraph:**
+## Safety Guarantees (Phase 3)
 
 Phase 3 is formally frozen and enforced by multiple independent safety layers.
-
-**Table or bullets:**
 
 - Transaction submission: Disabled
 - Funds movement: Disabled
@@ -70,13 +50,9 @@ Phase 3 is formally frozen and enforced by multiple independent safety layers.
 
 ---
 
-## 5. How Safety Is Enforced
-
-**Short paragraph:**
+## How Safety Is Enforced
 
 Safety is enforced through defense-in-depth mechanisms that fail fast on violation.
-
-**Bullet list:**
 
 - Hard-coded submission gate
 - Locked execution policy
@@ -86,33 +62,26 @@ Safety is enforced through defense-in-depth mechanisms that fail fast on violati
 
 ---
 
-## 6. Audits & Verification
-
-**Paragraph:**
+## Audits & Verification
 
 All guarantees are backed by machine-checkable invariants, internal security reviews, and immutable receipts.
 
-**Links (text only):**
-
-- Security Review (Option B)
-- Safety Attestation
-- Threat Model
+- [Security Review (Option B)](https://github.com/brouie/liminal/blob/main/docs/SECURITY_REVIEW_B.FINAL.md)
+- [Safety Attestation](https://github.com/brouie/liminal/blob/main/docs/SAFETY_ATTESTATION.md)
+- [Threat Model](https://github.com/brouie/liminal/blob/main/docs/THREAT_MODEL.md)
 
 ---
 
-## 7. Current Status
-
-**Single line:**
+## Current Status
 
 Current phase: Phase 3.10 (Frozen)
 
 ---
 
-## 8. Footer
+## Documentation
 
-**Minimal:**
-
-Documentation • GitHub • Security Contact
+- [README](https://github.com/brouie/liminal/blob/main/README.md)
+- [Security Policy](https://github.com/brouie/liminal/blob/main/SECURITY.md)
+- [GitHub Repository](https://github.com/brouie/liminal)
 
 ---
-
