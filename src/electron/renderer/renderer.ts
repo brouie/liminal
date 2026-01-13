@@ -5,6 +5,10 @@ const ctxLabel = document.getElementById('contexts')!;
 const output = document.getElementById('output') as HTMLPreElement;
 const txInput = document.getElementById('txid') as HTMLInputElement;
 
+function show(data: unknown) {
+  output.textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+}
+
 async function refresh() {
   const list = await api.listContexts();
   ctxLabel.textContent = `Contexts: ${JSON.stringify(list)}`;
@@ -30,31 +34,47 @@ document.getElementById('close')!.addEventListener('click', async () => {
 document.getElementById('submit')!.addEventListener('click', async () => {
   const txId = txInput.value.trim();
   if (!txId) {
-    output.textContent = 'txId required';
+    show('txId required');
     return;
   }
-  const res = await api.submitTransaction(txId);
-  output.textContent = JSON.stringify(res, null, 2);
+  try {
+    const res = await api.submitTransaction(txId);
+    if (res?.ok === false) {
+      show(res);
+    } else {
+      show(res);
+    }
+  } catch (err: any) {
+    show(`Error: ${err?.message ?? String(err)}`);
+  }
 });
 
 document.getElementById('status')!.addEventListener('click', async () => {
   const txId = txInput.value.trim();
   if (!txId) {
-    output.textContent = 'txId required';
+    show('txId required');
     return;
   }
-  const res = await api.getTransactionStatus(txId);
-  output.textContent = JSON.stringify(res, null, 2);
+  try {
+    const res = await api.getTransactionStatus(txId);
+    show(res);
+  } catch (err: any) {
+    show(`Error: ${err?.message ?? String(err)}`);
+  }
 });
 
 document.getElementById('receipt')!.addEventListener('click', async () => {
   const txId = txInput.value.trim();
   if (!txId) {
-    output.textContent = 'txId required';
+    show('txId required');
     return;
   }
-  const res = await api.getReceipt(txId);
-  output.textContent = JSON.stringify(res, null, 2);
+  try {
+    const res = await api.getReceipt(txId);
+    show(res);
+  } catch (err: any) {
+    show(`Error: ${err?.message ?? String(err)}`);
+  }
 });
 
 refresh();

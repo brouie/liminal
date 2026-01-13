@@ -28,7 +28,7 @@ function createMainWindow() {
   mainWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   mainWindow.webContents.on('will-navigate', (event, url) => {
     const parsed = new URL(url);
-    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    if (parsed.protocol !== 'https:') {
       event.preventDefault();
     }
   });
@@ -51,7 +51,7 @@ function createContext() {
   view.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   view.webContents.on('will-navigate', (event, url) => {
     const parsed = new URL(url);
-    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    if (parsed.protocol !== 'https:') {
       event.preventDefault();
     }
   });
