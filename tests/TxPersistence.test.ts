@@ -4,6 +4,8 @@ import { clearTxPersistenceStore, getTxPersistence } from '../src/main/modules/t
 import { getTransactionStatus, getReceipt } from '../src/main/api';
 import { TxState, TxObject, SimulatedTxPayload, SubmissionResult } from '../src/shared/tx-types';
 import { getTxStateMachine } from '../src/main/modules/tx';
+import { existsSync, rmSync } from 'fs';
+import { join } from 'path';
 
 const payload: SimulatedTxPayload = {
   programId: 'prog',
@@ -33,14 +35,30 @@ function buildTx(
 }
 
 describe('Tx Persistence & Restart Safety', () => {
+  const persistDir = join(process.cwd(), 'tmp-test-persist');
+
+  function clean() {
+    try {
+      if (existsSync(persistDir)) {
+        rmSync(persistDir, { recursive: true, force: true });
+      }
+    } catch {
+      // best effort
+    }
+  }
+
   beforeEach(() => {
+    process.env.LIMINAL_PERSIST_PATH = persistDir;
+    clean();
     clearTxPersistenceStore();
     resetTxPipeline();
   });
 
   afterEach(() => {
+    clean();
     clearTxPersistenceStore();
     resetTxPipeline();
+    delete process.env.LIMINAL_PERSIST_PATH;
   });
 
   it('restores transaction status after restart', () => {

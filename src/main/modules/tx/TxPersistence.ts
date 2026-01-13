@@ -19,6 +19,9 @@ class TxPersistence {
   private readonly filePath: string;
 
   constructor() {
+    // Optional override for tests or custom paths
+    const override = process.env.LIMINAL_PERSIST_PATH;
+
     // In prod, prefer Electron userData; in dev/test or when Electron unavailable, use cwd/data.
     let electronApp: any = undefined;
     if (isProd()) {
@@ -31,9 +34,10 @@ class TxPersistence {
     }
 
     const baseDir =
-      isProd() && electronApp?.getPath
+      override ||
+      (isProd() && electronApp?.getPath
         ? join(electronApp.getPath('userData'), 'tx-store')
-        : join(process.cwd(), 'data');
+        : join(process.cwd(), 'data'));
     this.dataDir = baseDir;
     this.filePath = join(baseDir, 'tx-store.json');
     this.ensureDir();
