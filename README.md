@@ -112,6 +112,9 @@ Phase 3 is frozen as read-only. Any attempt to modify execution paths must throw
 - Website: https://brouie.github.io/liminal/
 - Security: [`SECURITY.md`](SECURITY.md)
 
+## Downloads (v0.1.3)
+- Windows (NSIS), macOS (DMG), Linux (AppImage): https://github.com/brouie/liminal/releases/tag/v0.1.3
+
 ---
 
 ## Binary Quickstart (v0.1.x)

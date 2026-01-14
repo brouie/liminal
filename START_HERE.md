@@ -9,7 +9,7 @@
 - Not a general-purpose wallet; safety gates and invariants remain in place.
 
 ## Getting the App (v0.1.x)
-- Download binaries from the GitHub release (v0.1.3): Windows (NSIS), macOS (DMG), Linux (AppImage).
+- Download binaries from the GitHub release (v0.1.3): Windows (NSIS), macOS (DMG), Linux (AppImage): https://github.com/brouie/liminal/releases/tag/v0.1.3
 - Requirements: modern OS, internet for HTTPS navigation. No extra permissions.
 
 ## Using the Browser UI
