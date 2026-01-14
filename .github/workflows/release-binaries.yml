@@ -55,6 +55,7 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           fail_on_unmatched_files: false
+          overwrite: true
           files: |
             release/*.exe
             release/*.dmg
