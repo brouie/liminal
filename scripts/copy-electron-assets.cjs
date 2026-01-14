@@ -21,3 +21,9 @@ files.forEach(file => {
     fs.copyFileSync(file.src, file.dest);
   }
 });
+
+// Clean any stale icons (we no longer bundle a custom icon in CI)
+const iconsDir = path.join(__dirname, '..', 'build', 'icons');
+if (fs.existsSync(iconsDir)) {
+  fs.rmSync(iconsDir, { recursive: true, force: true });
+}

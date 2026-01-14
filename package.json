@@ -7,7 +7,7 @@
   },
   "main": "dist/main/index.js",
   "scripts": {
-    "build": "tsc && node scripts/copy-electron-assets.cjs && node scripts/generate-icon.cjs",
+    "build": "tsc && node scripts/copy-electron-assets.cjs",
     "start": "npm run build && electron .",
     "dev": "tsc && electron .",
     "test": "vitest run",
