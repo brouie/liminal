@@ -144,7 +144,7 @@ export class SafetyReportGenerator {
     
     return {
       version: this.REPORT_VERSION,
-      generatedAt: Date.now(),
+      generatedAt: report.generatedAt,
       safetyReportHash: report.reportHash,
       invariantVersion: invariantState.version,
       phaseFrozen: phaseFreeze.isFrozen(),
