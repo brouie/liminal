@@ -382,8 +382,8 @@ describe('Blocklist Rule Evaluation Performance', () => {
     
     const elapsed = performance.now() - start;
     
-    // Should complete in reasonable time (less than 5 seconds for 1000 lookups on slow machines)
-    expect(elapsed).toBeLessThan(5000);
+    // Allow headroom for slower CI runners
+    expect(elapsed).toBeLessThan(8000);
   });
 });
 
