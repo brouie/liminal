@@ -29,6 +29,7 @@ import { getPhaseFreeze, PhaseFreeze } from './PhaseFreeze';
 export class SafetyReportGenerator {
   private readonly REPORT_VERSION = '3.10.0';
   private readonly PHASE = '3';
+  private lastReport: SafetyReport | null = null;
   
   /**
    * Generate safety report
@@ -111,10 +112,12 @@ export class SafetyReportGenerator {
     // Generate deterministic hash
     const reportHash = this.hashReport(report);
     
-    return {
+    const fullReport: SafetyReport = {
       ...report,
       reportHash,
     };
+    this.lastReport = fullReport;
+    return fullReport;
   }
   
   /**
@@ -138,7 +141,8 @@ export class SafetyReportGenerator {
     invariantVersion: number;
     phaseFrozen: boolean;
   } {
-    const report = this.generateReport();
+    // Reuse the last generated report if available to keep metadata aligned
+    const report = this.lastReport ?? this.generateReport();
     const invariantState = getInvariantManager().getState();
     const phaseFreeze = getPhaseFreeze();
     
