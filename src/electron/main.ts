@@ -275,7 +275,8 @@ app.whenReady().then(() => {
     if (session.activeTabId && tabs.has(session.activeTabId)) {
       setActiveTab(session.activeTabId);
     } else if (tabs.size > 0) {
-      setActiveTab(tabs.keys().next().value);
+      const firstTabId = tabs.keys().next().value;
+      if (firstTabId) setActiveTab(firstTabId);
     }
   } else {
     createContext();
